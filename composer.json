@@ -1,0 +1,11 @@
+{
+    "name": "root/lighty",
+    "description": "Lighty A simple and light MVC framework for PHP.",
+    "authors": [
+        {
+            "name": "EL ALLAM Noura",
+            "email": "nouraellm@gmail.com"
+        }
+    ],
+    "require": {}
+}
