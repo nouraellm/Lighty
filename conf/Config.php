@@ -8,7 +8,7 @@
 /*
  * Database Configuration
  */
- define('ENABLED', 'TRUE');
+ define('ENABLED', TRUE);
  define('HOST', '');
  define('USERNAME', '');
  define('PASSWORD', '');

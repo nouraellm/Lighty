@@ -8,8 +8,8 @@ class Database extends MYSQLi
 {
     public function __construct()
     {
-        if(ENABLED == 'TRUE'):
+        if (ENABLED) {
             parent::__construct(HOST, USERNAME, PASSWORD, DATABASE );
-        endif;
+        }
     }
 }
