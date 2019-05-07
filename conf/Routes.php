@@ -1,5 +1,4 @@
 <?php
 
-$route['default']   = 'HomeController@index';
-$route['home']      = 'HomeController@index';
- 
+$route['default'] = 'HomeController@index';
+$route['home']    = 'HomeController@index';
