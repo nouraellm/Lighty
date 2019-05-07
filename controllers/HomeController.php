@@ -3,10 +3,11 @@
 use \App\Controller as Controller;
 use \Models\Home as Home;
 
-/*
+/**
  * HomeController Class
  */
-class HomeController extends Controller{
+class HomeController extends Controller
+{
     public function __construct()
     {
         parent::__construct();
@@ -19,6 +20,7 @@ class HomeController extends Controller{
         $this->view->msg = 'Lighty Framework';
         $this->view->render('Welcome');
     }
+
     public function __404()
     {
         $this->view->msg = '404 Not Found';
