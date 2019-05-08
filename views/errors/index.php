@@ -1,0 +1,1 @@
+<p> Error <?php echo $this->msg ?></p>
