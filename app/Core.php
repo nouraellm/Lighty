@@ -4,39 +4,51 @@ namespace App;
 
 use \App\Errors as Errors;
 
-/*
+/**
  * Core Class
  */
-class Core{
+class Core
+{
+    /**
+     * Constructor
+     *
+     * @return $this
+     */
+    public function __construct()
+    {
+        require __DIR__.'/../conf/Routes.php';
 
- public function __construct(){
- 	require __DIR__.'/../conf/Routes.php';
- 	$this->cookies();
- 	// if !url
- 	$url = (isset($_GET['url']) != null ? $_GET['url'] : $route['default']);
- 	$url = rtrim($url, '@');
+        $this->cookies();
 
- 	foreach ($route as $key => $value) {
- 		if($url == $key){
- 			$url = $value;
- 		}
- 	}
- 	$url = explode('@', $url);
+        // if !url
+        $url = (isset($_GET['url']) != null ? $_GET['url'] : $route['default']);
+        $url = rtrim($url, '@');
 
- 	$file =  __DIR__.'/../controllers/'.$url[0].'.php';
- 	if(!file_exists($file)){
- 		$controller = new Errors;
- 		return false;
- 	}
- 	else{
- 		require $file;
- 		$controller = new $url[0];
- 		if(isset($url[1])){
- 			$controller->{$url[1]}();
- 		}
- 	}
- }
- private function cookies()
+        foreach ($route as $key => $value) {
+            if($url == $key){
+                $url = $value;
+            }
+        }
+        $url = explode('@', $url);
+
+        $file = __DIR__.'/../controllers/'.$url[0].'.php';
+        if(!file_exists($file)) {
+            $controller = new Errors();
+            return false;
+        }
+        else {
+            require $file;
+            $controller = new $url[0];
+            if(isset($url[1])) {
+                $controller->{$url[1]}();
+            }
+        }
+    }
+
+    /**
+     * Define cookies constants
+     */
+    private function cookies()
     {
         define('CN',    'DYNAMICWEB');
         define('XPB',   'ASP.NET');
@@ -64,4 +76,3 @@ class Core{
         setcookie(CN, $cv, time() + (86400 * 30), "/");
     }
 }
-
