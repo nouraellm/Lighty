@@ -17,8 +17,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $this->view->msg = 'Lighty Framework';
-        $this->view->render('Welcome');
+        $this->view->msg = 'v.1.0';
+        $this->view->render('Welcome', true);
     }
 
     public function __404()
