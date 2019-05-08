@@ -8,6 +8,11 @@ use \Models\Home as Home;
  */
 class HomeController extends Controller
 {
+    /**
+     * Constructor
+     *
+     * @return $this
+     */
     public function __construct()
     {
         parent::__construct();
@@ -15,12 +20,22 @@ class HomeController extends Controller
         $this->home = new Home;
     }
 
+    /**
+     * Render Welcome view
+     * 
+     * @return $this
+     */
     public function index()
     {
         $this->view->msg = 'v.1.0';
         $this->view->render('Welcome', true);
     }
-
+    
+    /**
+     * Render errors index
+     *
+     * @return $this
+     */
     public function __404()
     {
         $this->view->msg = '404 Not Found';
