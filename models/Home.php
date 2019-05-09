@@ -4,11 +4,11 @@ namespace Models;
 
 use \App\Model as Model;
 
-/*
+/**
  * Home Class 
  */
-class Home extends Model{
-    
+class Home extends Model
+{
     /**
      * Constructor
      *
@@ -18,38 +18,39 @@ class Home extends Model{
     {
         parent::__construct();
     }
-    
+
     /**
-     * @param string $query takes an sql query as an argument
-     *
-     * @param string $type takes ARRAY_CON || OBJECT_CON as arguments
-     *
-     * @return $arr
+     * Transform query results to data array
+     * 
+     * @param  string $query takes an sql query as an argument
+     * @param  string $type  takes ARRAY_CON || OBJECT_CON as arguments
+     * @return array|string  data array or 'Invalid Parameters' string on failure
      */
     private function transform($query, $type)
     {
         $arr = array();
-        if($type == 'ARRAY_CON'){
-            while( $data = $query->fetch_array(MYSQLI_ASSOC)){
+        if ($type == 'ARRAY_CON') {
+            while ( $data = $query->fetch_array(MYSQLI_ASSOC) ) {
                 $arr[] = $data;
             }
         }
-        elseif($type == 'OBJECT_CON'){
-            while( $data = $query->fetch_object()){
+        else if ($type == 'OBJECT_CON') {
+            while ( $data = $query->fetch_object() ) {
                 $arr[] = $data;
             }
         }
-        else{
-            $arr = 'Invalid Parameters';
+        else {
+            $arr = 'Invalid Parameters'; // TODO: throw an exception instead of returning a string
         }
         return $arr;
     }
+
     /**
-     * @param string $table
-     *
-     * @param array $data
+     * Insert data into a table
      * 
-     * @return $this
+     * @param  string  $table
+     * @param  array   $data
+     * @return integer inserted row id
      */
     public function insert($table, $data)
     {
@@ -65,15 +66,13 @@ class Home extends Model{
         $this->db->query($sql);
         return $this->db->insert_id;
     }
-    
+
     /**
-     * @param array $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
-     *
-     * @param array $data Ex: ['name' = > 'Lighty Framework v.1.0']
-     *
-     * @param constant $cookie default = 'CN'
-     *
-     * @return $this
+     * Update data into a table
+     * 
+     * @param  array  $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     * @param  array  $data    Ex: ['name' = > 'Lighty Framework v.1.0']
+     * @param  string $cookie  cookie constant, default = 'CN'
      */
     public function update($options, $data, $cookie = 'CN')
     {
@@ -83,16 +82,16 @@ class Home extends Model{
             $sql .= $key."='". $value."', ";
         }
         $sql = rtrim($sql, ", ");
-        $sql .= " WHERE `".$options['column']."` = '".$options['value']."' ";
+        $sql.= " WHERE `".$options['column']."` = '".$options['value']."' ";
         $this->db->query($sql);
     }
-   
+
     /**
-     * @param string $table
-     *
-     * @param string $type default = 'OBJECT_CON'
-     *
-     * @return $arr
+     * Fetch data from a table
+     * 
+     * @param  string $table
+     * @param  string $type  default = 'OBJECT_CON'
+     * @return array         array of data
      */
     public function fetchAll($table, $type = 'OBJECT_CON')
     {
@@ -103,23 +102,25 @@ class Home extends Model{
     }
 
     /**
-     * @param array $data  Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
-     *
-     * @return $data_obj
+     * Fetch first row from a table
+     * 
+     * @param  array $data  Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     * @return object       data object
      */
     public function first($data)
     {
         $sql = "SELECT * FROM ".$data['table']." WHERE `".$data['colummn']."` = '".$data['value']."' ";
         $query = $this->db->query($sql);
-        if($data['type'] == 'array'){
+        if ($data['type'] == 'array') {
             $data_obj = $query->fetch_array(MYSQLI_ASSOC);
         }
-        elseif($data['type'] == 'object'){
+        else if ($data['type'] == 'object') {
             $data_obj = $query->fetch_object();
         }
-        else{
+        else {
             $data_obj = 'Invalid parameters!';
         }
+        // TODO: this part of code seems repeated, need to find a workaround
         return $data_obj;
     }
 
