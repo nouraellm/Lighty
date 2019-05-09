@@ -32,7 +32,7 @@ class Core
         $url = explode('@', $url);
 
         $file = __DIR__.'/../controllers/'.$url[0].'.php';
-        if(!file_exists($file)) {
+        if(! file_exists($file)) {
             $controller = new Errors();
         }
         else {
@@ -45,7 +45,7 @@ class Core
     }
 
     /**
-     * Define cookies constants
+     * Define cookies
      */
     private function cookies()
     {

@@ -64,7 +64,7 @@ if( ! function_exists('_string_normalization'))
 if( ! function_exists('argon'))
 {
     /**
-     * Encrypt passwords using ARGON algorithm
+     * Encrypt passwords using ARGON2I algorithm
      * 
      * @param  string $string password or string to hash
      * @return string         hash
