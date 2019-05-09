@@ -4,6 +4,9 @@ namespace App;
 
 use MYSQLi;
 
+/**
+ * Database class
+ */
 class Database extends MYSQLi
 {
     /**

@@ -38,4 +38,4 @@ switch (ENVIRONMENT)
 }
 
 // Core init
-$core = new Core;
+$core = new Core();
