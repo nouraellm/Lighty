@@ -34,7 +34,6 @@ class Core
         $file = __DIR__.'/../controllers/'.$url[0].'.php';
         if(!file_exists($file)) {
             $controller = new Errors();
-            return false;
         }
         else {
             require $file;
