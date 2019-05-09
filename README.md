@@ -4,7 +4,7 @@ Lighty is a free open-source PHP & MVC based framework, created by **Noura** and
 ### Requirements
 - PHP >= 7.2
 - Python 3.4 for Argon2i hashing
-- mod_rewrite enabeled
+- mod_rewrite enabled
 - Composer installed
 ### Download
 Clone <code>$ git clone https://github.com/nouraellm/Lighty.git</code> or download the zip folder.
