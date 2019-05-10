@@ -87,6 +87,18 @@ class Home extends Model
     }
 
     /**
+     * Delete data from a table
+     *
+     * @param  array  $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     */
+    public function delete($options)
+    {
+        $sql = "DELETE FROM ".$options['table'];
+        $sql.= " WHERE `".$options['column']."` = '".$options['value']."' ";
+        $this->db->query($sql);
+    }
+
+    /**
      * Fetch data from a table
      * 
      * @param  string $table

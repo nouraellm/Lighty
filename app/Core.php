@@ -38,7 +38,7 @@ class Core
         else {
             require $file;
             $controller = new $url[0];
-            if(isset($url[1])) {
+            if (isset($url[1])) {
                 $controller->{$url[1]}();
             }
         }
