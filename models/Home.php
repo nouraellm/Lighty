@@ -116,12 +116,12 @@ class Home extends Model
     /**
      * Fetch first row from a table
      * 
-     * @param  array $data  Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
-     * @return object       data object
+     * @param  array $data  Ex: ['table' => 'test', 'type' => 'type | object', 'conditions' => ['column' => 'value', 'column 1' => 'value 2', ...], ]
+     * @return object data object
      */
     public function first($data)
     {
-        $sql = "SELECT * FROM ".$data['table']." WHERE `".$data['colummn']."` = '".$data['value']."' ";
+        $sql = "SELECT * FROM " . $this->buildQuery($data['conditions']);
         $query = $this->db->query($sql);
         if ($data['type'] == 'array') {
             $data_obj = $query->fetch_array(MYSQLI_ASSOC);

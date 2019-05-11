@@ -28,4 +28,20 @@ class Model
     {
         require_once __DIR__.'/../models/'.$file.'.php';
     }
+
+    /**
+     * Build query
+     * 
+     * @param  array  $conditions  Ex: ['name' => 'test', 'description' => 'bla bla bla', ...]
+     * @return String $query       EX: WHERE 1 AND `id` = 1 AND .... 
+     */
+    public function buildQuery($conditions = [])
+    {
+        $query = " WHERE 1 ";
+        foreach ($conditions as $key => $condition) {
+            $query .= " AND `" . $key . "` = '" $condition . "'";
+        }
+
+        return $query;
+    }
 }
