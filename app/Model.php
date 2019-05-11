@@ -30,12 +30,12 @@ class Model
     }
 
     /**
-     * Build query
+     * Set query conditions
      * 
      * @param  array  $conditions  Ex: ['name' => 'test', 'description' => 'bla bla bla', ...]
      * @return String $query       EX: WHERE 1 AND `id` = 1 AND .... 
      */
-    public function buildQuery($conditions = [])
+    public function setQueryConditions($conditions = [])
     {
         $query = " WHERE 1 ";
         foreach ($conditions as $key => $condition) {

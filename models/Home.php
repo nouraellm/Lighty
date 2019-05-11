@@ -22,24 +22,42 @@ class Home extends Model
     /**
      * Transform query results to data array
      * 
-     * @param  string $query takes an sql query as an argument
-     * @param  string $type  takes ARRAY_CON || OBJECT_CON as arguments
-     * @return array|string  data array or 'Invalid Parameters' string on failure
+     * @param  string  $query      takes an sql query as an argument
+     * @param  string  $type       takes 'array' || 'object' as arguments
+     * @param  boolean $first_only should return first data only (used on first() method)
+     * @return array|object|string data array or object or 'Invalid Parameters' string on failure
      */
-    private function transform($query, $type)
+    private function transform($query, $type, $first_only = false)
     {
         $arr = array();
-        if ($type == 'ARRAY_CON') {
-            while ( $data = $query->fetch_array(MYSQLI_ASSOC) ) {
-                $arr[] = $data;
+        if ($type == 'array')
+        {
+            while ( $data = $query->fetch_array(MYSQLI_ASSOC) )
+            {
+                if ($first_only) {
+                    $arr = $data;
+                    break;
+                }
+                else {
+                    $arr[] = $data;
+                }
             }
         }
-        else if ($type == 'OBJECT_CON') {
-            while ( $data = $query->fetch_object() ) {
-                $arr[] = $data;
+        else if ($type == 'object')
+        {
+            while ( $data = $query->fetch_object() )
+            {
+                if ($first_only) {
+                    $arr = $data;
+                    break;
+                }
+                else {
+                    $arr[] = $data;
+                }
             }
         }
-        else {
+        else
+        {
             $arr = 'Invalid Parameters'; // TODO: throw an exception instead of returning a string
         }
         return $arr;
@@ -70,7 +88,7 @@ class Home extends Model
     /**
      * Update data into a table
      * 
-     * @param  array  $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     * @param  array  $options Ex: ['table' => 'test', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
      * @param  array  $data    Ex: ['name' = > 'Lighty Framework v.1.0']
      * @param  string $cookie  cookie constant, default = 'CN'
      */
@@ -82,19 +100,19 @@ class Home extends Model
             $sql .= $key."='". $value."', ";
         }
         $sql = rtrim($sql, ", ");
-        $sql.= " WHERE `".$options['column']."` = '".$options['value']."' ";
+        $sql.= $this->setQueryConditions($options['conditions']);
         $this->db->query($sql);
     }
 
     /**
      * Delete data from a table
      *
-     * @param  array  $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     * @param  array  $options Ex: ['table' => 'test', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
      */
     public function delete($options)
     {
         $sql = "DELETE FROM ".$options['table'];
-        $sql.= " WHERE `".$options['column']."` = '".$options['value']."' ";
+        $sql.= $this->setQueryConditions($options['conditions']);
         $this->db->query($sql);
     }
 
@@ -102,10 +120,10 @@ class Home extends Model
      * Fetch data from a table
      * 
      * @param  string $table
-     * @param  string $type  default = 'OBJECT_CON'
+     * @param  string $type  default = 'object'
      * @return array         array of data
      */
-    public function fetchAll($table, $type = 'OBJECT_CON')
+    public function fetchAll($table, $type = 'object')
     {
         $sql = "SELECT * FROM `$table`";
         $query = $this->db->query($sql);
@@ -116,24 +134,14 @@ class Home extends Model
     /**
      * Fetch first row from a table
      * 
-     * @param  array $data  Ex: ['table' => 'test', 'type' => 'type | object', 'conditions' => ['column' => 'value', 'column 1' => 'value 2', ...], ]
-     * @return object data object
+     * @param  array $data  Ex: ['table' => 'test', 'type' => 'array | object', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
+     * @return array|object data array or object
      */
     public function first($data)
     {
-        $sql = "SELECT * FROM " . $this->buildQuery($data['conditions']);
+        $sql = "SELECT * FROM " . $this->setQueryConditions($data['conditions']);
         $query = $this->db->query($sql);
-        if ($data['type'] == 'array') {
-            $data_obj = $query->fetch_array(MYSQLI_ASSOC);
-        }
-        else if ($data['type'] == 'object') {
-            $data_obj = $query->fetch_object();
-        }
-        else {
-            $data_obj = 'Invalid parameters!';
-        }
-        // TODO: this part of code seems repeated, need to find a workaround
-        return $data_obj;
+        return $this->transform($query, $data['type'], true);
     }
 
     /**

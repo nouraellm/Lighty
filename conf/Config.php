@@ -22,7 +22,7 @@ define('ENVIRONMENT', 'development');
 /*
  * ARGON2I Custom Configuration
  */
-define('MEMORY_COST', '2048');
-define('TIME_COST', '11');
+define('MEMORY_COST',     '2048');
+define('TIME_COST',         '11');
 define('PARALLELISM_FACTOR', '7');
 

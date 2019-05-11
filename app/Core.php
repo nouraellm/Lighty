@@ -20,22 +20,27 @@ class Core
 
         $this->cookies();
 
-        // if !url
-        $url = (isset($_GET['url']) != null ? $_GET['url'] : $route['default']);
+        // if !url use default route
+        $url = (isset($_GET['url']) ? $_GET['url'] : 'default');
         $url = rtrim($url, '@');
 
+        // fetch route
         foreach ($route as $key => $value) {
-            if($url == $key){
+            if ($url == $key) {
                 $url = $value;
             }
         }
+
+        // get controller & view name(s)
         $url = explode('@', $url);
 
+        // if controller doesn't exist => load Errors view
         $file = __DIR__.'/../controllers/'.$url[0].'.php';
         if(! file_exists($file)) {
             $controller = new Errors();
         }
         else {
+            // Load controller & call the wanted view
             require $file;
             $controller = new $url[0];
             if (isset($url[1])) {
