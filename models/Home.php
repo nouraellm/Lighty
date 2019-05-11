@@ -22,21 +22,28 @@ class Home extends Model
     /**
      * Transform query results to data array
      * 
-     * @param  string $query takes an sql query as an argument
-     * @param  string $type  takes ARRAY_CON || OBJECT_CON as arguments
-     * @return array|string  data array or 'Invalid Parameters' string on failure
+     * @param  string  $query      takes an sql query as an argument
+     * @param  string  $type       takes 'array' || 'object' as arguments
+     * @param  boolean $only_once  should transform data only once (like on first() method)
+     * @return array|string        data array or 'Invalid Parameters' string on failure
      */
-    private function transform($query, $type)
+    private function transform($query, $type, $only_once = false)
     {
         $arr = array();
-        if ($type == 'ARRAY_CON') {
+        if ($type == 'array') {
             while ( $data = $query->fetch_array(MYSQLI_ASSOC) ) {
                 $arr[] = $data;
+                if ($only_once) {
+                    break;
+                }
             }
         }
-        else if ($type == 'OBJECT_CON') {
+        else if ($type == 'object') {
             while ( $data = $query->fetch_object() ) {
                 $arr[] = $data;
+                if ($only_once) {
+                    break;
+                }
             }
         }
         else {
@@ -102,10 +109,10 @@ class Home extends Model
      * Fetch data from a table
      * 
      * @param  string $table
-     * @param  string $type  default = 'OBJECT_CON'
+     * @param  string $type  default = 'object'
      * @return array         array of data
      */
-    public function fetchAll($table, $type = 'OBJECT_CON')
+    public function fetchAll($table, $type = 'object')
     {
         $sql = "SELECT * FROM `$table`";
         $query = $this->db->query($sql);
@@ -123,17 +130,7 @@ class Home extends Model
     {
         $sql = "SELECT * FROM " . $this->buildQuery($data['conditions']);
         $query = $this->db->query($sql);
-        if ($data['type'] == 'array') {
-            $data_obj = $query->fetch_array(MYSQLI_ASSOC);
-        }
-        else if ($data['type'] == 'object') {
-            $data_obj = $query->fetch_object();
-        }
-        else {
-            $data_obj = 'Invalid parameters!';
-        }
-        // TODO: this part of code seems repeated, need to find a workaround
-        return $data_obj;
+        return $this->transform($query, $data['type'], true);
     }
 
     /**
