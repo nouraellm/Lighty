@@ -30,8 +30,10 @@ class Home extends Model
     private function transform($query, $type, $first_only = false)
     {
         $arr = array();
-        if ($type == 'array') {
-            while ( $data = $query->fetch_array(MYSQLI_ASSOC) ) {
+        if ($type == 'array')
+        {
+            while ( $data = $query->fetch_array(MYSQLI_ASSOC) )
+            {
                 if ($first_only) {
                     $arr = $data;
                     break;
@@ -41,8 +43,10 @@ class Home extends Model
                 }
             }
         }
-        else if ($type == 'object') {
-            while ( $data = $query->fetch_object() ) {
+        else if ($type == 'object')
+        {
+            while ( $data = $query->fetch_object() )
+            {
                 if ($first_only) {
                     $arr = $data;
                     break;
@@ -52,7 +56,8 @@ class Home extends Model
                 }
             }
         }
-        else {
+        else
+        {
             $arr = 'Invalid Parameters'; // TODO: throw an exception instead of returning a string
         }
         return $arr;
