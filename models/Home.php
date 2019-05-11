@@ -128,7 +128,7 @@ class Home extends Model
      */
     public function first($data)
     {
-        $sql = "SELECT * FROM " . $this->buildQuery($data['conditions']);
+        $sql = "SELECT * FROM " . $this->setQueryConditions($data['conditions']);
         $query = $this->db->query($sql);
         return $this->transform($query, $data['type'], true);
     }
