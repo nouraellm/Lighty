@@ -9,10 +9,10 @@ if ( ! function_exists('IP'))
      */
     function IP()
     {
-        $HTTP_CLIENT_IP         = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : ':/:' ;       
-        $HTTP_X_FORWARDED_FOR   = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : ':/:';
-        $REMOTE_ADDR            = $_SERVER['REMOTE_ADDR'];
-        $string = $HTTP_CLIENT_IP.' - '.$HTTP_X_FORWARDED_FOR.' - '.$REMOTE_ADDR;
+        $HTTP_CLIENT_IP       = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : ':/:' ;       
+        $HTTP_X_FORWARDED_FOR = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : ':/:';
+        $REMOTE_ADDR          = $_SERVER['REMOTE_ADDR'];
+        $string               = $HTTP_CLIENT_IP.' - '.$HTTP_X_FORWARDED_FOR.' - '.$REMOTE_ADDR;
         return $string;
     }
 }

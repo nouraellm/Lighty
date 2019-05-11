@@ -11,7 +11,7 @@ class View
      * Render a view
      * 
      * @param  string  $file    view filename
-     * @param  boolean $include includes header & footer also with the view
+     * @param  boolean $include includes header & footer also
      */
     public function render($file, $include = false)
     {
