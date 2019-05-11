@@ -123,8 +123,8 @@ class Home extends Model
     /**
      * Fetch first row from a table
      * 
-     * @param  array $data  Ex: ['table' => 'test', 'type' => 'type | object', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
-     * @return object data object
+     * @param  array $data  Ex: ['table' => 'test', 'type' => 'array | object', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
+     * @return array|object data array or object
      */
     public function first($data)
     {
