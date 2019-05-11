@@ -24,25 +24,31 @@ class Home extends Model
      * 
      * @param  string  $query      takes an sql query as an argument
      * @param  string  $type       takes 'array' || 'object' as arguments
-     * @param  boolean $only_once  should transform data only once (like on first() method)
-     * @return array|string        data array or 'Invalid Parameters' string on failure
+     * @param  boolean $first_only should return first data only (used on first() method)
+     * @return array|object|string data array or object or 'Invalid Parameters' string on failure
      */
-    private function transform($query, $type, $only_once = false)
+    private function transform($query, $type, $first_only = false)
     {
         $arr = array();
         if ($type == 'array') {
             while ( $data = $query->fetch_array(MYSQLI_ASSOC) ) {
-                $arr[] = $data;
-                if ($only_once) {
+                if ($first_only) {
+                    $arr = $data;
                     break;
+                }
+                else {
+                    $arr[] = $data;
                 }
             }
         }
         else if ($type == 'object') {
             while ( $data = $query->fetch_object() ) {
-                $arr[] = $data;
-                if ($only_once) {
+                if ($first_only) {
+                    $arr = $data;
                     break;
+                }
+                else {
+                    $arr[] = $data;
                 }
             }
         }
