@@ -77,7 +77,7 @@ class Home extends Model
     /**
      * Update data into a table
      * 
-     * @param  array  $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     * @param  array  $options Ex: ['table' => 'test', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
      * @param  array  $data    Ex: ['name' = > 'Lighty Framework v.1.0']
      * @param  string $cookie  cookie constant, default = 'CN'
      */
@@ -89,19 +89,19 @@ class Home extends Model
             $sql .= $key."='". $value."', ";
         }
         $sql = rtrim($sql, ", ");
-        $sql.= " WHERE `".$options['column']."` = '".$options['value']."' ";
+        $sql.= $this->setQueryConditions($options['conditions']);
         $this->db->query($sql);
     }
 
     /**
      * Delete data from a table
      *
-     * @param  array  $options Ex: ['table' => 'test', 'column' => 'id', 'value' => 1]
+     * @param  array  $options Ex: ['table' => 'test', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
      */
     public function delete($options)
     {
         $sql = "DELETE FROM ".$options['table'];
-        $sql.= " WHERE `".$options['column']."` = '".$options['value']."' ";
+        $sql.= $this->setQueryConditions($options['conditions']);
         $this->db->query($sql);
     }
 
@@ -123,7 +123,7 @@ class Home extends Model
     /**
      * Fetch first row from a table
      * 
-     * @param  array $data  Ex: ['table' => 'test', 'type' => 'type | object', 'conditions' => ['column' => 'value', 'column 1' => 'value 2', ...], ]
+     * @param  array $data  Ex: ['table' => 'test', 'type' => 'type | object', 'conditions' => ['column' => 'value', 'column 2' => 'value 2', ...], ]
      * @return object data object
      */
     public function first($data)
