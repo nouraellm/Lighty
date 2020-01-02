@@ -17,7 +17,18 @@ class Controller
      */
     public function __construct()
     {
-        $this->view = new View();
+       
         $this->model = new Model();
     }
+
+    public  function render($file_template, $arr_var=[])
+    {
+          $view = new View();
+          
+          $file = explode(".",$file_template);
+
+          return $view->render($file[0].".html.twig", $arr_var);
+    }
+
+    
 }

@@ -8,11 +8,11 @@ define('URL', 'http://localhost:8080/');
 /*
  * Database Configuration
  */
-define('ENABLED', TRUE);
-define('HOST',      '');
-define('USERNAME',  '');
-define('PASSWORD',  '');
-define('DATABASE',  '');
+define('ENABLED', False);
+define('HOST',      'localhost');
+define('USERNAME',  'root');
+define('PASSWORD',  'root');
+define('DATABASE',  'lit');
 
 /*
  * Define Environment, Allowed environments variables : development / production

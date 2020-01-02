@@ -7,7 +7,10 @@ Lighty is a free open-source PHP & MVC based framework, created by **Noura** and
 - mod_rewrite enabled
 - Composer installed
 ### Download
+
 Clone <code>$ git clone https://github.com/nouraellm/Lighty.git</code> or download the zip folder.
+
+
 ### Setup
 if you used the the download button unzip the folder and then open it, you can use the following commands if you like terminal:
 
@@ -87,6 +90,14 @@ Lighty is easy to use and understand, if you still have a doubt about how PHP/MV
                                              │   └── Header.php
                                              └── Welcome.php
                                         
+ ## feautures
+      - add Authentication
+      - add ORM(object relationship mapping )
+      - add URL mapping 
+      - add hand Request 
+      - add Serailizer Model And Request data
+      - add meddleware Controller
+
  ## Note 
  
  This project was made for learning purpose. Feel free to <img src="https://img.icons8.com/material/24/000000/code-fork.png"> and contribute.    
