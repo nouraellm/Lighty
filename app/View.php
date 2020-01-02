@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 /**
  * View Class
  */
@@ -13,14 +15,18 @@ class View
      * @param  string  $file    view filename
      * @param  boolean $include includes header & footer also
      */
-    public function render($file, $include = false)
-    {
-        if ($include) {
-            require_once __DIR__.'/../views/includes/Header.php';
-            require_once __DIR__.'/../views/'.$file.'.php';
-            require_once __DIR__.'/../views/includes/Footer.php';
-        }
+    private $loader;
+    private $twig;
 
-        require_once __DIR__.'/../views/'.$file.'.php';
+    function __construct()
+    {
+        $this->loader = new FilesystemLoader(__DIR__ .'/../views/');
+        $this->twig = new Environment($this->loader);
+
+    }
+    public function render($file_template, $arr_var=[])
+    {
+     
+        return $this->twig->render($file_template, $arr_var);
     }
 }

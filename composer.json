@@ -7,5 +7,7 @@
             "email": "nouraellm@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^2.0"
+    }
 }

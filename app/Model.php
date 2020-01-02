@@ -39,7 +39,7 @@ class Model
     {
         $query = " WHERE 1 ";
         foreach ($conditions as $key => $condition) {
-            $query .= " AND `" . $key . "` = '" $condition . "'";
+            $query .= " AND `" . $key . "` = '" .$condition . "'";
         }
 
         return $query;

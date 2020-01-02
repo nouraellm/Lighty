@@ -44,7 +44,7 @@ class Core
             require $file;
             $controller = new $url[0];
             if (isset($url[1])) {
-                $controller->{$url[1]}();
+              echo $controller->{$url[1]}();
             }
         }
     }

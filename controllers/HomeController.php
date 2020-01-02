@@ -17,6 +17,7 @@ class HomeController extends Controller
     {
         parent::__construct();
         $this->model->call('Home');
+
         $this->home = new Home();
     }
 
@@ -26,8 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $this->view->msg = 'v.1.0';
-        $this->view->render('Welcome', true);
+
+
+       return $this->render('Welcome', ['name' => 'Lighty']);;
     }
 
     /**
@@ -36,7 +38,9 @@ class HomeController extends Controller
      */
     public function __404()
     {
-        $this->view->msg = '404 Not Found';
-        $this->view->render('errors/index');
+
+
+
+        $this->render('errors/index');
     }
 }
