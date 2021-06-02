@@ -63,7 +63,6 @@ Lighty is easy to use and understand, if you still have a doubt about how PHP/MV
                                          │   │   │   ├── favicon.ico
                                          │   │   │   └── logo.png
                                          │   │   └── js
-                                         │   │       ├── all.js
                                          │   │       ├── bootstrap.min.js
                                          │   │       ├── jquery-3.3.1.min.js
                                          │   │       ├── jquery.scrollTo.min.js
@@ -90,13 +89,13 @@ Lighty is easy to use and understand, if you still have a doubt about how PHP/MV
                                              │   └── Header.php
                                              └── Welcome.php
                                         
- ## feautures
-      - add Authentication
-      - add ORM(object relationship mapping )
-      - add URL mapping 
-      - add hand Request 
-      - add Serailizer Model And Request data
-      - add meddleware Controller
+ ## Features
+      - Authentication
+      - ORM(object relationship mapping )
+      - URL mapping 
+      - Hand Request 
+      - Serailizer Model And Request data
+      - Middleware Controller
 
  ## Note 
  
