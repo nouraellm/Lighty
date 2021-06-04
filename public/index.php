@@ -7,12 +7,6 @@ define('PATH', __DIR__ . DS);
 require __DIR__.'/../vendor/autoload.php';
 
 // Required files
-require_once PATH.'../app/Errors.php';
-require_once PATH.'../app/Core.php';
-require_once PATH.'../app/Controller.php';
-require_once PATH.'../app/Model.php';
-require_once PATH.'../app/View.php';
-require_once PATH.'../app/Database.php';
 require_once PATH.'../conf/Config.php';
 require_once PATH.'../conf/Functions.php';
 
