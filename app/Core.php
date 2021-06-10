@@ -18,10 +18,12 @@ class Core
     {
         require __DIR__.'/../conf/Routes.php';
 
+        $request = new Request();
+
         $this->cookies();
 
         // if !url use default route
-        $url = (isset($_GET['url']) ? $_GET['url'] : 'default');
+        $url = $request->get('url', 'default');
         $url = rtrim($url, '@');
 
         // fetch route
