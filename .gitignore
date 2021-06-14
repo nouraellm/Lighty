@@ -2,3 +2,5 @@
 *.lock
 *.DS_Store
 composer-setup.php
+.phpunit.result.cache
+.idea/
