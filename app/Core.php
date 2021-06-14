@@ -2,8 +2,6 @@
 
 namespace App;
 
-use \App\Errors as Errors;
-
 /**
  * Core Class
  */
@@ -26,12 +24,13 @@ class Core
         $url = $request->get('url', 'default');
         $url = rtrim($url, '@');
 
-        // fetch route
+	    // fetch route
         foreach ($route as $key => $value) {
             if ($url == $key) {
                 $url = $value;
             }
         }
+
 
         // get controller & view name(s)
         $url = explode('@', $url);
@@ -40,14 +39,19 @@ class Core
         $file = __DIR__.'/../controllers/'.$url[0].'.php';
         if(! file_exists($file)) {
             $controller = new Errors();
-        }
-        else {
+	        exit((new Response($controller->render()))->status(404));
+        } else {
             // Load controller & call the wanted view
             require $file;
+
             $controller = new $url[0];
-            if (isset($url[1])) {
-              echo $controller->{$url[1]}();
+            $method = $url[1];
+            if (!method_exists($controller, $method)) {
+            	exit((new Response('method not found.')));
             }
+
+            $output = $controller->{$method}();
+            exit(new Response($output));
         }
     }
 
